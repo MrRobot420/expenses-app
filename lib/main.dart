@@ -18,6 +18,7 @@ class TransactionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.purple,
           title: Text('Expenses App'),
         ),
         body: SingleChildScrollView(
@@ -29,7 +30,7 @@ class TransactionPage extends StatelessWidget {
                 width: double.infinity,
                 height: 100,
                 child: Card(
-                  color: Colors.blue,
+                  color: Colors.yellow,
                   child: Text('CHART'),
                   elevation: 10,
                 ),
