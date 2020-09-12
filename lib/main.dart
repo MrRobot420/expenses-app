@@ -30,6 +30,9 @@ class TransactionPage extends StatelessWidget {
     ),
   ];
 
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,8 @@ class TransactionPage extends StatelessWidget {
           title: Text('Expenses App'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Container(
               width: double.infinity,
@@ -48,6 +52,34 @@ class TransactionPage extends StatelessWidget {
                 elevation: 10,
               ),
             ),
+            Card(
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    TextField(
+                      decoration:
+                          InputDecoration(labelText: 'Grund für Geldverlust'),
+                      controller: titleController,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Betrag in €'),
+                      controller: amountController,
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        // TO DO: Button implementieren
+                        print(titleController.text);
+                        print(amountController.text);
+                      },
+                      child: Text('Hinzufügen'),
+                      textColor: Colors.purple,
+                    )
+                  ],
+                ),
+              ),
+            ),
             Column(
               children: transactions.map((tx) {
                 return Card(
@@ -56,7 +88,7 @@ class TransactionPage extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.symmetric(
                           vertical: 10,
-                          horizontal: 15,
+                          horizontal: 20,
                         ),
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -69,7 +101,7 @@ class TransactionPage extends StatelessWidget {
                           '€ ${tx.amount}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: 16,
                             color: Colors.purple,
                           ),
                         ),
