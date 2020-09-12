@@ -20,21 +20,23 @@ class TransactionPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Expenses App'),
         ),
-        body: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 100,
-              child: Card(
-                color: Colors.blue,
-                child: Text('CHART'),
-                elevation: 10,
+        body: SingleChildScrollView(
+                  child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                width: double.infinity,
+                height: 100,
+                child: Card(
+                  color: Colors.blue,
+                  child: Text('CHART'),
+                  elevation: 10,
+                ),
               ),
-            ),
-            UserTransactions()
-          ],
+              UserTransactions()
+            ],
+          ),
         ));
   }
 }
