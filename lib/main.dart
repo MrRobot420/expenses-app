@@ -10,7 +10,28 @@ class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Expenses',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        fontFamily: 'Quicksand',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline6: TextStyle(
+                color: Colors.purple,
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.light().textTheme.copyWith(
+                headline6: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                ),
+              ),
+        ),
+      ),
       home: TransactionPage(),
     );
   }
@@ -63,13 +84,15 @@ class _TransactionPageState extends State<TransactionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple,
-        title: Text('Expenses App'),
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Text(
+          'Personal Expenses',
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(
               Icons.add_circle,
-              color: Colors.yellow,
+              color: Theme.of(context).accentColor,
             ),
             onPressed: () => _startAddNewTransaction(context),
           )
@@ -84,7 +107,7 @@ class _TransactionPageState extends State<TransactionPage> {
               width: double.infinity,
               height: 100,
               child: Card(
-                color: Colors.yellow,
+                color: Theme.of(context).accentColor,
                 child: Text('CHART'),
                 elevation: 10,
               ),
@@ -97,10 +120,10 @@ class _TransactionPageState extends State<TransactionPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(
           Icons.add_circle,
-          color: Colors.yellow,
+          color: Theme.of(context).accentColor,
         ),
         onPressed: () => _startAddNewTransaction(context),
-        backgroundColor: Colors.purple,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }
