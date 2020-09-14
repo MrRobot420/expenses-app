@@ -1,3 +1,4 @@
+import 'package:expenses/widgets/chart.dart';
 import 'package:expenses/widgets/new_transactions.dart';
 import 'package:expenses/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
@@ -44,19 +45,25 @@ class TransactionPage extends StatefulWidget {
 
 class _TransactionPageState extends State<TransactionPage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: 't1',
-      title: 'Neue Schuhe',
-      amount: 59.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Sixpack Wasser',
-      amount: 2.99,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Neue Schuhe',
+    //   amount: 59.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Sixpack Wasser',
+    //   amount: 2.99,
+    //   date: DateTime.now(),
+    // ),
   ];
+
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   void _addNewTransaction(String txTitle, double txAmount) {
     final newTx = Transaction(
@@ -91,7 +98,7 @@ class _TransactionPageState extends State<TransactionPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(
-              Icons.add_circle,
+              Icons.add,
               color: Theme.of(context).accentColor,
             ),
             onPressed: () => _startAddNewTransaction(context),
@@ -103,15 +110,7 @@ class _TransactionPageState extends State<TransactionPage> {
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              height: 100,
-              child: Card(
-                color: Theme.of(context).accentColor,
-                child: Text('CHART'),
-                elevation: 10,
-              ),
-            ),
+            Chart(_recentTransactions),
             TransactionList(_userTransactions),
           ],
         ),
@@ -119,7 +118,7 @@ class _TransactionPageState extends State<TransactionPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(
-          Icons.add_circle,
+          Icons.add,
           color: Theme.of(context).accentColor,
         ),
         onPressed: () => _startAddNewTransaction(context),
