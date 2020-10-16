@@ -26,11 +26,8 @@ class _NewTransactionState extends State<NewTransaction> {
       return;
     }
 
-    widget.addTransactions(
-      _titleController.text,
-      double.parse(_amountController.text),
-      _selectedDate
-    );
+    widget.addTransactions(_titleController.text,
+        double.parse(_amountController.text), _selectedDate);
 
     Navigator.of(context).pop();
   }
@@ -54,47 +51,54 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextField(
-              decoration: InputDecoration(labelText: 'Grund für Geldverlust'),
-              controller: _titleController,
-              onSubmitted: (_) => _submitEntry(),
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Betrag in €'),
-              controller: _amountController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitEntry(),
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Text(_selectedDate == null
-                      ? 'Kein Datum gewählt!'
-                      : 'Gewähltes Datum: ${DateFormat.yMd().format(_selectedDate)}'),
-                ),
-                FlatButton(
-                  textColor: Theme.of(context).primaryColor,
-                  onPressed: _presentDatePicker,
-                  child: Text(
-                    'Wähle Datum',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+    return SingleChildScrollView(
+          child: Card(
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(labelText: 'Grund für Geldverlust'),
+                controller: _titleController,
+                onSubmitted: (_) => _submitEntry(),
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: 'Betrag in €'),
+                controller: _amountController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                onSubmitted: (_) => _submitEntry(),
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Text(_selectedDate == null
+                        ? 'Kein Datum gewählt!'
+                        : 'Gewähltes Datum: ${DateFormat.yMd().format(_selectedDate)}'),
                   ),
-                ),
-              ],
-            ),
-            FlatButton(
-              onPressed: _submitEntry,
-              child: Text('Hinzufügen'),
-              color: Theme.of(context).primaryColor,
-              textColor: Theme.of(context).textTheme.button.color,
-            )
-          ],
+                  FlatButton(
+                    textColor: Theme.of(context).primaryColor,
+                    onPressed: _presentDatePicker,
+                    child: Text(
+                      'Wähle Datum',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+              FlatButton(
+                onPressed: _submitEntry,
+                child: Text('Hinzufügen'),
+                color: Theme.of(context).primaryColor,
+                textColor: Theme.of(context).textTheme.button.color,
+              )
+            ],
+          ),
         ),
       ),
     );
