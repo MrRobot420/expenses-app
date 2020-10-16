@@ -1,10 +1,13 @@
-import 'package:expenses/widgets/chart.dart';
-import 'package:expenses/widgets/new_transactions.dart';
-import 'package:expenses/widgets/transaction_list.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 
 import 'models/transaction.dart';
+
+import 'package:expenses/widgets/chart.dart';
+import 'package:expenses/widgets/new_transactions.dart';
+import 'package:expenses/widgets/transaction_list.dart';
 
 void main() {
   // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -126,7 +129,8 @@ class _TransactionPageState extends State<TransactionPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text('Tabelle anzeigen'),
-                  Switch(
+                  Switch.adaptive(
+                    activeColor: Theme.of(context).accentColor,
                     value: _showChart,
                     onChanged: (val) {
                       setState(() {
@@ -157,7 +161,7 @@ class _TransactionPageState extends State<TransactionPage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Platform.isIOS ? Container() : FloatingActionButton(
         child: Icon(
           Icons.add,
           color: Theme.of(context).accentColor,
