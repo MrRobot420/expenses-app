@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
@@ -52,7 +55,7 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-          child: Card(
+      child: Card(
         child: Container(
           padding: EdgeInsets.only(
             top: 10,
@@ -81,14 +84,22 @@ class _NewTransactionState extends State<NewTransaction> {
                         ? 'Kein Datum gewählt!'
                         : 'Gewähltes Datum: ${DateFormat.yMd().format(_selectedDate)}'),
                   ),
-                  FlatButton(
-                    textColor: Theme.of(context).primaryColor,
-                    onPressed: _presentDatePicker,
-                    child: Text(
-                      'Wähle Datum',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  Platform.isIOS
+                      ? CupertinoButton(
+                          child: Text(
+                            'Wähle Datum',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: _presentDatePicker,
+                        )
+                      : FlatButton(
+                          textColor: Theme.of(context).primaryColor,
+                          onPressed: _presentDatePicker,
+                          child: Text(
+                            'Wähle Datum',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
                 ],
               ),
               FlatButton(
