@@ -2,10 +2,14 @@ import 'package:expenses/widgets/chart.dart';
 import 'package:expenses/widgets/new_transactions.dart';
 import 'package:expenses/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
 
 import 'models/transaction.dart';
 
-void main() => runApp(ExpensesApp());
+void main() {
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(ExpensesApp());
+}
 
 class ExpensesApp extends StatelessWidget {
   @override
@@ -109,13 +113,13 @@ class _TransactionPageState extends State<TransactionPage> {
                 height: (MediaQuery.of(context).size.height -
                         appBar.preferredSize.height -
                         MediaQuery.of(context).padding.top) *
-                    0.4,
+                    0.3,
                 child: Chart(_recentTransactions)),
             Container(
                 height: (MediaQuery.of(context).size.height -
                         appBar.preferredSize.height -
                         MediaQuery.of(context).padding.top) *
-                    0.6,
+                    0.7,
                 child: TransactionList(_userTransactions, _deleteTransaction)),
           ],
         ),
