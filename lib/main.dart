@@ -141,7 +141,7 @@ class _TransactionPageState extends State<TransactionPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Tabelle anzeigen'),
+                  Text('Tabelle anzeigen', style: Theme.of(context).textTheme.headline6,),
                   Switch.adaptive(
                     activeColor: Theme.of(context).accentColor,
                     value: _showChart,
