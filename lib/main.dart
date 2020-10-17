@@ -51,10 +51,28 @@ class TransactionPage extends StatefulWidget {
   _TransactionPageState createState() => _TransactionPageState();
 }
 
-class _TransactionPageState extends State<TransactionPage> {
+class _TransactionPageState extends State<TransactionPage>
+    with WidgetsBindingObserver {
   final List<Transaction> _userTransactions = [];
 
   bool _showChart = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
+  }
+
+  @override
+  dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
@@ -91,8 +109,8 @@ class _TransactionPageState extends State<TransactionPage> {
     });
   }
 
-  List<Widget> _buildLandscapeContent(
-      MediaQueryData mediaQuery, PreferredSizeWidget appBar, Widget txListWidget) {
+  List<Widget> _buildLandscapeContent(MediaQueryData mediaQuery,
+      PreferredSizeWidget appBar, Widget txListWidget) {
     return [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -123,8 +141,8 @@ class _TransactionPageState extends State<TransactionPage> {
     ];
   }
 
-  List<Widget> _buildPortraitContent(
-      MediaQueryData mediaQuery, PreferredSizeWidget appBar, Widget txListWidget) {
+  List<Widget> _buildPortraitContent(MediaQueryData mediaQuery,
+      PreferredSizeWidget appBar, Widget txListWidget) {
     return [
       Container(
           height: (mediaQuery.size.height -
